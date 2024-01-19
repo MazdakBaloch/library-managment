@@ -10,10 +10,15 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     @vite('resources/js/app.js')
     @inertiaHead
   </head>
   <body id="page-top">
+    @if (session()->has('success'))
+        <p class="tex-success">{{session('success')}}</p>
+    @endif
     @inertia
 
     <!-- Scroll to Top Button-->
@@ -49,5 +54,6 @@
  
      <!-- Custom scripts for all pages-->
      <script src="{{asset('assets/js/sb-admin-2.min.js')}}"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
   </body>
 </html>
