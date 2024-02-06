@@ -40,7 +40,26 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'title' => 'required|string',
+            'author_id' => 'required|exists:authors,id',
+            'publisher_id' => 'required|exists:publishers,id',
+            'category_id' => 'required|exists:categories,id',
+            'language_id' => 'required|exists:languages,id',
+            'published_at' => 'required|date',
+            'copies' => 'required|integer',
+            'price' => 'required|numeric',
+        ]);
+
+        $new_book = new Book();
+        $new_book->title = ucfirst($request->title);
+        $new_book->category_id = $request->category_id;
+        $new_book->publisher_id = $request->publisher_id;
+        $new_book->copies = $request->copies;
+        $new_book->price = $request->price;
+        if($new_book->save()){
+            $new_book->
+        } 
     }
 
     /**
@@ -70,9 +89,9 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        
     }
 
     /**
