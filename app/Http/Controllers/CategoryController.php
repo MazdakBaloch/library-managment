@@ -13,11 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(10)->through(fn($category) => [
-            'id' => $category->id,
-            'name' => $category->name,
-        ]);
-        return Inertia::render('Category.Index',['categories' => $categories]);
+        $categories = Category::select('id','name')->latest('created_at')->paginate(10);
+        return Inertia::render('Category/Index',['categories' => $categories]);
     }
 
     /**
@@ -25,7 +22,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Category.Create');
+        return Inertia::render('Category/Create');
     }
 
     /**

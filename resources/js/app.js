@@ -1,6 +1,8 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import Layout from './Shared/Layout.vue';
+import {Link} from '@inertiajs/vue3';
+import LinkBtn from './Shared/LinkBtn.vue';
 
 createInertiaApp({
   resolve: name => {
@@ -11,6 +13,8 @@ createInertiaApp({
   },
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
+      .component('Link', Link)
+      .component('LinkBtn', LinkBtn)
       .use(plugin)
       .mount(el)
   },
