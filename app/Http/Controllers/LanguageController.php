@@ -13,8 +13,9 @@ class LanguageController extends Controller
      */
     public function index()
     {
+        $langauges = Language::select('id','name')->latest()->paginate(10);
         return Inertia::render('Language/Index',[
-            'languages' => Language::paginate(10),
+            'langauges' => $langauges,
         ]);
     }
 
@@ -57,7 +58,8 @@ class LanguageController extends Controller
      */
     public function edit(Language $language)
     {
-        return Inertia::render('Language/Edit',
+    
+        return   Inertia::render('Language/Edit',
         [
             'language' => $language
         ]);
@@ -68,8 +70,9 @@ class LanguageController extends Controller
      */
     public function update(Request $request, Language $language)
     {
+        // dd($language->name);
         $request->validate([
-            'name' => 'required|alpha_dash|min:2|max:30|unique:languages,name'. $language->id
+            'name' => 'required|alpha_dash|min:2|max:30|unique:languages,name,'. $language->name
         ]);
         $language->name = ucfirst($request->name);
         if($language->save()){
