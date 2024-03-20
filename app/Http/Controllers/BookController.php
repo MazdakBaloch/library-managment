@@ -57,9 +57,7 @@ class BookController extends Controller
         $new_book->publisher_id = $request->publisher_id;
         $new_book->copies = $request->copies;
         $new_book->price = $request->price;
-        if($new_book->save()){
-            $new_book->
-        } 
+        
     }
 
     /**

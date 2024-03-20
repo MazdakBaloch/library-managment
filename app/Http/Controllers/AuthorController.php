@@ -14,7 +14,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::paginate(10);
+        $authors = Author::latest()->paginate(10);
+        
         return Inertia::render('Author/Index',[
             'authors' => $authors
         ]);
@@ -34,9 +35,10 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'firstName' => 'required|alpha|min:3|max:3',
-            'lastName' => 'alpha|max:30'
+            'firstName' => 'required|alpha|min:3|max:30',
+            'lastName' => 'max:30'
         ]);
+
         $new_author = new Author();
         $new_author->first_name = ucfirst($request->firstName);
         $new_author->last_name = ucfirst($request->lastName);
@@ -72,7 +74,7 @@ class AuthorController extends Controller
     public function update(Request $request,Author $author)
     {
         $request->validate([
-            'firstName' => 'required|alpha|min:3|max:3',
+            'firstName' => 'required|alpha|min:3|max:30',
             'lastName' => 'alpha|max:30'
         ]);
         $author->first_name = ucfirst($request->firstName);

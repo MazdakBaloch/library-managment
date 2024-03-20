@@ -57,7 +57,8 @@ class LanguageController extends Controller
      */
     public function edit(Language $language)
     {
-        return Inertia::render('Language/Edit',[
+        return Inertia::render('Language/Edit',
+        [
             'language' => $language
         ]);
     }

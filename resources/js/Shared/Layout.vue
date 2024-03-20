@@ -18,6 +18,20 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <!-- alert -->
+                    <div v-if="$page.props.flash.success" class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ $page.props.flash.success }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- error -->
+<div v-if="$page.props.flash.error" class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ $page.props.flash.error }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
                     
                     <!-- Page Heading -->
                     <slot />

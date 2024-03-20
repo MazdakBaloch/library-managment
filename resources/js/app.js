@@ -3,6 +3,8 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import Layout from './Shared/Layout.vue';
 import {Link} from '@inertiajs/vue3';
 import LinkBtn from './Shared/LinkBtn.vue';
+import { Bootstrap5Pagination } from 'laravel-vue-pagination';
+
 
 createInertiaApp({
   resolve: name => {
@@ -15,6 +17,7 @@ createInertiaApp({
     createApp({ render: () => h(App, props) })
       .component('Link', Link)
       .component('LinkBtn', LinkBtn)
+      .component('Bootstrap5Pagination', Bootstrap5Pagination)
       .use(plugin)
       .mount(el)
   },

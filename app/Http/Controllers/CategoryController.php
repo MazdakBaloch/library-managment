@@ -32,7 +32,11 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|alpha_dash|min:3|max:20|unique:categories,name'
+        ],
+        [
+           'name.unique' => 'Category already exists'
         ]);
+        
         $new_category = new Category();
         $new_category->name = ucfirst($request->name);
         if($new_category->save()){
@@ -54,7 +58,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return Inertia::render('Category.Edit',['category' => $category]);
+        return Inertia::render('Category/Edit',['category' => $category]);
     }
 
     /**
@@ -64,7 +68,10 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|min:3|max:20|alpha_dash|unique:categories,name,' .$category->id
-        ]);
+        ],
+         [
+            'name.unique' => 'Category already exists'
+         ]);
         $category->name = ucfirst($request->name);
         if($category->save()){
 

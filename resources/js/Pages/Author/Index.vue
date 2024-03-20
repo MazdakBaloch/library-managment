@@ -1,5 +1,5 @@
 <template>
-    <Table title="Categories">
+    <Table title="Authors">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
@@ -9,34 +9,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-if="categories.data" v-for="category in categories.data">
-                     <td>{{category.id}}</td>
-                     <td>{{category.name}}</td>
+                <tr v-if="authors.data" v-for="author in authors.data">
+                     <td>{{author.id}}</td>
+                     <td>{{author.first_name + ' ' + author.last_name}}</td>
                      <td>
-                        <LinkBtn :url="'/categories/'+category.id + '/edit'" classN="btn btn-primary">Edit</LinkBtn>
-                        <button type="button" class="btn btn-danger mx-2" @click.prevent="onDelete(category.id)">Delete</button>
+                        <LinkBtn :url="'/authors/'+author.id + '/edit'" classN="btn btn-primary">Update</LinkBtn>
+                        <button type="button" class="btn btn-danger mx-2" @click.prevent="onDelete(author.id)">Delete</button>
                      </td>
                 </tr>
             </tbody>
         </table>
-        <Bootstrap5Pagination :data="categories" @pagination-change-page="getResult" />
+        <Bootstrap5Pagination :data="authors" @pagination-change-page="getResult" />
     </Table>
 </template>
 <script setup>
 import Table from '../../Shared/Table.vue'
 import LinkBtn from '../../Shared/LinkBtn.vue'
 import { useForm } from '@inertiajs/vue3';
-
-const {categories} = defineProps({
-    categories: Object
+defineProps({
+    authors: Object
 })
-
 const form = useForm({})
 const getResult = (page = 1) => {
-    form.get('/categories?page=' + page)
+    form.get('/authors?page=' + page)
 }
 const onDelete = (id) => {
     if(!confirm('Are you sure?')) return
- form.delete('/categories/'+id)   
+  form.delete('/authors/'+id)  
 }
 </script>
